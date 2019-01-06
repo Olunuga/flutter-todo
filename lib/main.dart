@@ -60,7 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.calendar_today), title: Text
               ('Today')),
-            BottomNavigationBarItem(icon: Icon(Icons.list), title: Text('Pending')),
+            BottomNavigationBarItem(icon: Icon(Icons.list), title: Text
+              ('Todos')),
             BottomNavigationBarItem(icon: Icon(Icons.done_all), title: Text('Completed'))
           ],
         currentIndex: _selectedIndex,
@@ -75,7 +76,7 @@ class PendingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(
-      title: Text('Pending'),
+      title: Text('Todos'),
     ),
       body: Center(
         child: RaisedButton(
