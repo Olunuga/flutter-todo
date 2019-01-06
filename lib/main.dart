@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/Pages/CompletedPage.dart';
+import 'package:flutter_todo/Pages/PendingPage.dart';
+import 'package:flutter_todo/Pages/TodayPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,21 +14,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: MyHomePage(title: 'Todo'),
+      home: MainPage(title: 'Todo'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class MainPage extends StatefulWidget {
+  MainPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MainPageState extends State<MainPage> {
   int _counter = 0;
   int _selectedIndex = 0;
 
@@ -72,55 +75,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class PendingPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
-      title: Text('Todos'),
-    ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: (){
-          //Navigate back to first screen
-        },
-          child: Text('Go back'),
-        ),
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-
-}
-
-class TodayPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
-      title: Text('Today'),
-    ),
-      body: Center(
-        child: Text('Hello Today with no floating button')
-      ),
-    );
-  }
-
-}
-
-class CompletedPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
-      title: Text('Completed'),
-    ),
-      body: Center(
-          child: Text('Hello Completed ')
-      ),
-    );
-  }
-
-}
