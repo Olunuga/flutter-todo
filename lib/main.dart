@@ -29,6 +29,12 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectedIndex = 0;
 
+  final _widgetOptions = [
+    TodayPage(),
+    PendingPage(),
+    CompletedPage()
+  ];
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -44,30 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
 
-        title: Text(widget.title),
-      ),
       body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex)
+      ),
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+
       bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.calendar_today), title: Text
@@ -78,6 +66,60 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
+
     );
   }
+}
+
+class PendingPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(
+      title: Text('Pending'),
+    ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: (){
+          //Navigate back to first screen
+        },
+          child: Text('Go back'),
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+
+}
+
+class TodayPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(
+      title: Text('Today'),
+    ),
+      body: Center(
+        child: Text('Hello Today with no floating button')
+      ),
+    );
+  }
+
+}
+
+class CompletedPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(
+      title: Text('Completed'),
+    ),
+      body: Center(
+          child: Text('Hello Completed ')
+      ),
+    );
+  }
+
 }
