@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/Pages/CompletedPage.dart';
-import 'package:flutter_todo/Pages/PendingPage.dart';
-import 'package:flutter_todo/Pages/TodayPage.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_todo/Sections//CompletedPage.dart';
+import 'package:flutter_todo/Sections//PendingPage.dart';
+import 'package:flutter_todo/Sections//TodayPage.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  debugPaintSizeEnabled= false;
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
