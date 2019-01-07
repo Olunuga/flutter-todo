@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_todo/Sections//CompletedPage.dart';
+import 'package:flutter_todo/Sections//AccountPage.dart';
 import 'package:flutter_todo/Sections//PendingPage.dart';
 import 'package:flutter_todo/Sections//TodayPage.dart';
 
@@ -39,7 +39,7 @@ class _MainPageState extends State<MainPage> {
   final _widgetOptions = [
     TodayPage(),
     PendingPage(),
-    CompletedPage()
+    AccountPage()
   ];
 
   void _incrementCounter() {
@@ -69,7 +69,8 @@ class _MainPageState extends State<MainPage> {
               ('Today')),
             BottomNavigationBarItem(icon: Icon(Icons.list), title: Text
               ('Todos')),
-            BottomNavigationBarItem(icon: Icon(Icons.done_all), title: Text('Completed'))
+            BottomNavigationBarItem(icon: Icon(Icons.person_outline), title: Text
+              ('Account'))
           ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
