@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/Widgets/TodoItem.dart';
+import 'package:flutter_todo/Sections/TodoLists/NewTodoPage.dart';
 
 class PendingPage extends StatelessWidget {
-
-  void _handleOnItemClicked(index){
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,11 @@ class PendingPage extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: (){
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) =>
+              NewTodoPage()));
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
@@ -30,3 +31,4 @@ class PendingPage extends StatelessWidget {
   }
 
 }
+
