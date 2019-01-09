@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/Widgets/CustomCheckbox.dart';
 
 class TodoItem extends StatefulWidget{
-  TodoItem(this.index);
+  TodoItem(this.index, this.text);
+
   final int index;
+  final String text;
 
 
   @override
@@ -44,8 +46,7 @@ class TodoItemState extends State<TodoItem>{
             ),
 
             Expanded(
-                child:  Text('This is supposed to be a long text that should '
-                    'wrap around using softwrap',
+                child:  Text(widget.text,
                   softWrap: true,)
             )
 
