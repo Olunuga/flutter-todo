@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NewTodoPage extends StatelessWidget {
 
@@ -6,8 +7,8 @@ class NewTodoPage extends StatelessWidget {
   BuildContext mContext;
 
   void _submitInput(text){
-    //Submit input here
-    print(text);
+    Firestore.instance.collection('Todos').document()
+        .setData({ 'text': text});
     Navigator.pop(mContext);
   }
 
