@@ -20,7 +20,8 @@ class TodayPage extends StatelessWidget {
           child: ListView.builder(
             itemCount: 10,
               itemBuilder: (BuildContext context, int index){
-              return TodoItem(index);
+              return TodoItem(index,"Some long text that should be shown to a"
+                  " user");
 
           })
       ),
