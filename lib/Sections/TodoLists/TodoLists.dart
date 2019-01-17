@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/Widgets/Section.dart';
 import 'package:flutter_todo/Widgets/TodoItem.dart';
 import 'package:flutter_todo/Sections/TodoLists/NewTodoPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +11,50 @@ class PendingPage extends StatelessWidget {
     //update firebase here
     print('ischecked is $isChecked and identifier is $identifier');
     Firestore.instance.collection("Todos").document(identifier).updateData({'completed':isChecked});
+  }
+
+
+  List<Section> _generateLists(AsyncSnapshot<QuerySnapshot> snapshot){
+
+    List<TodoItem> pendingList = List<TodoItem>();
+    List<TodoItem> completedList = List<TodoItem>();
+
+    snapshot.data.documents.forEach((document){
+
+        TodoItem todoItem = TodoItem(document.documentID, document["text"],
+            document["completed"],
+            _onTodoClicked);
+
+        if(document['completed'] == true){
+          completedList.add(todoItem);
+        }else{
+          pendingList.add(todoItem);
+        }
+
+    });
+
+    Section completedSection;
+    if(completedList.length > 0){
+      completedSection = Section(heading:"Completed",
+        todoItemList:completedList);
+    }
+
+    Section pendingSection;
+    if(pendingList.length > 0){
+      pendingSection = Section(heading:"Pending",
+          todoItemList:pendingList);
+    }
+
+    List<Section> sectionList = List<Section>();
+    if(pendingSection != null){
+      sectionList.add(pendingSection);
+    }
+
+    if(completedSection != null){
+      sectionList.add(completedSection);
+    }
+
+    return sectionList;
   }
 
 
@@ -32,12 +77,7 @@ class PendingPage extends StatelessWidget {
                 documentSnapshotList = snapshot.data.documents;
 
                 return new ListView(
-                  children: snapshot.data.documents.map((DocumentSnapshot document) {
-                    print(document.data);
-                    documentSnapshotList = snapshot.data.documents;
-                    return new TodoItem(document.documentID,document["text"],
-                        document["completed"],_onTodoClicked);
-                  }).toList(),
+                  children: _generateLists(snapshot),
                 );
               }
             }
