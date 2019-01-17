@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/Widgets/CustomCheckbox.dart';
 
-class TodoItem extends StatefulWidget{
-  TodoItem(this.index, this.text);
 
-  final int index;
+typedef OnItemClicked = void Function({bool isChecked, String identifier});
+
+class TodoItem extends StatelessWidget{
+  TodoItem(this.identifier, this.text, this.completed, this.onItemClicked);
+
+  final String identifier;
   final String text;
-
-
-  @override
-  State<StatefulWidget> createState()  => TodoItemState();
-
-}
-
-class TodoItemState extends State<TodoItem>{
-  bool _checked = false;
+  final bool completed;
+  final OnItemClicked onItemClicked;
 
   void _onCheckBoxChange(){
-    setState(() {
-      _checked = !_checked;
-    });
+    onItemClicked(isChecked: !completed,identifier:identifier);
   }
 
   void _voidCall(isChecked) => {};
-
 
 
   @override
@@ -38,7 +31,7 @@ class TodoItemState extends State<TodoItem>{
             Container(
               margin: EdgeInsets.only(right: 15),
               child:CustomCheckbox(
-                  value: _checked,
+                  value: completed,
                   materialTapTargetSize: null,
                   onChanged: _voidCall,
                   useTapTarget: false,
@@ -46,7 +39,7 @@ class TodoItemState extends State<TodoItem>{
             ),
 
             Expanded(
-                child:  Text(widget.text,
+                child:  Text(text,
                   softWrap: true,)
             )
 
@@ -60,5 +53,6 @@ class TodoItemState extends State<TodoItem>{
     // TODO: implement build
     return detector;
   }
+
 }
 

@@ -8,7 +8,7 @@ class NewTodoPage extends StatelessWidget {
 
   void _submitInput(text){
     Firestore.instance.collection('Todos').document()
-        .setData({ 'text': text});
+        .setData({ 'text': text,'completed':false,'tags':['work','android']});
     Navigator.pop(mContext);
   }
 

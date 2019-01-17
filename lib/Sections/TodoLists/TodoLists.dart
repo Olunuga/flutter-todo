@@ -4,6 +4,15 @@ import 'package:flutter_todo/Sections/TodoLists/NewTodoPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PendingPage extends StatelessWidget {
+  List<DocumentSnapshot> documentSnapshotList;
+
+  _onTodoClicked({isChecked,identifier}){
+    //update firebase here
+    print('ischecked is $isChecked and identifier is $identifier');
+    Firestore.instance.collection("Todos").document(identifier).updateData({'completed':isChecked});
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +28,18 @@ class PendingPage extends StatelessWidget {
               return new Text('Error: ${snapshot.error}');
             switch (snapshot.connectionState){
               case ConnectionState.waiting: return new Text('Loading...');
-              default:
+              default:{
+                documentSnapshotList = snapshot.data.documents;
+
                 return new ListView(
                   children: snapshot.data.documents.map((DocumentSnapshot document) {
-                    return new TodoItem(0,document["text"]);
+                    print(document.data);
+                    documentSnapshotList = snapshot.data.documents;
+                    return new TodoItem(document.documentID,document["text"],
+                        document["completed"],_onTodoClicked);
                   }).toList(),
                 );
+              }
             }
           },
         )
@@ -36,7 +51,7 @@ class PendingPage extends StatelessWidget {
               MaterialPageRoute(builder: (context) =>
               NewTodoPage()));
         },
-        tooltip: 'Increment',
+        tooltip: 'Add todo',
         child: Icon(Icons.add),
       ),
     );
