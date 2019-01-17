@@ -50,7 +50,6 @@ class TodoItem extends StatelessWidget{
       onTap: _onCheckBoxChange,
     );
 
-    // TODO: implement build
     return detector;
   }
 
