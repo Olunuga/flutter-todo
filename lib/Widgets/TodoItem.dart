@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/Widgets/CustomCheckbox.dart';
 
-
 typedef OnItemClicked = void Function({bool isChecked, String identifier});
 
-class TodoItem extends StatelessWidget{
+class TodoItem extends StatelessWidget {
   TodoItem(this.identifier, this.text, this.completed, this.onItemClicked);
 
   final String identifier;
@@ -12,17 +11,15 @@ class TodoItem extends StatelessWidget{
   final bool completed;
   final OnItemClicked onItemClicked;
 
-  void _onCheckBoxChange(){
-    onItemClicked(isChecked: !completed,identifier:identifier);
+  void _onCheckBoxChange() {
+    onItemClicked(isChecked: !completed, identifier: identifier);
   }
 
   void _voidCall(isChecked) => {};
 
-
   @override
   Widget build(BuildContext context) {
-
-    GestureDetector detector  = GestureDetector(
+    GestureDetector detector = GestureDetector(
       child: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -30,19 +27,24 @@ class TodoItem extends StatelessWidget{
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(right: 15),
-              child:CustomCheckbox(
+              child: CustomCheckbox(
                   value: completed,
                   materialTapTargetSize: null,
                   onChanged: _voidCall,
                   useTapTarget: false,
                   activeColor: Colors.teal),
             ),
-
-            Expanded(
-                child:  Text(text,
-                  softWrap: true,)
-            )
-
+            Column(
+              children: <Widget>[
+                Text(text),
+                Container(
+                    child: FlatButton(
+                        child: Text("Edit"),
+                      onPressed: null,
+                    )
+                )
+              ],
+            ),
           ],
         ),
         padding: EdgeInsets.all(16.0),
@@ -52,6 +54,4 @@ class TodoItem extends StatelessWidget{
 
     return detector;
   }
-
 }
-
