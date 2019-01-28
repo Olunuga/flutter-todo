@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/Widgets/Section.dart';
 import 'package:flutter_todo/Widgets/TodoItem.dart';
-import 'package:flutter_todo/Sections/TodoLists/NewTodoPage.dart';
+import 'package:flutter_todo/UI/TodoLists/NewTodoPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PendingPage extends StatelessWidget {
@@ -11,6 +11,10 @@ class PendingPage extends StatelessWidget {
     //update firebase here
     print('ischecked is $isChecked and identifier is $identifier');
     Firestore.instance.collection("Todos").document(identifier).updateData({'completed':isChecked});
+  }
+
+  _onEditTodoClicked({identifier}){
+    print('I want to edit $identifier');
   }
 
 
@@ -23,7 +27,7 @@ class PendingPage extends StatelessWidget {
 
         TodoItem todoItem = TodoItem(document.documentID, document["text"],
             document["completed"],
-            _onTodoClicked);
+            _onTodoClicked, _onEditTodoClicked);
 
         if(document['completed'] == true){
           completedList.add(todoItem);

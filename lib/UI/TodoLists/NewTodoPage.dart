@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class NewTodoPage extends StatelessWidget {
 
   String mText;
+  bool isEditing;
+
   BuildContext mContext;
 
   void _submitInput(text){
