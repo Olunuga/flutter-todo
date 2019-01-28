@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PendingPage extends StatelessWidget {
   List<DocumentSnapshot> documentSnapshotList;
+  BuildContext mContext;
 
   _onTodoClicked({isChecked,identifier}){
     //update firebase here
@@ -13,13 +14,18 @@ class PendingPage extends StatelessWidget {
     Firestore.instance.collection("Todos").document(identifier).updateData({'completed':isChecked});
   }
 
-  _onEditTodoClicked({identifier}){
+  _onEditTodoClicked({identifier, text}){
     print('I want to edit $identifier');
+    Navigator.push(mContext,
+        MaterialPageRoute(builder: (context) =>
+            NewTodoPage(true,text,identifier)));
   }
 
 
   List<Section> _generateLists(AsyncSnapshot<QuerySnapshot> snapshot){
 
+    //TODO: optimizing ,, programmatically create this list if there are
+    // multiple items.
     List<TodoItem> pendingList = List<TodoItem>();
     List<TodoItem> completedList = List<TodoItem>();
 
@@ -65,6 +71,7 @@ class PendingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    mContext = context;
 
     return Scaffold(appBar: AppBar(
       title: Text('Todos'),
@@ -93,7 +100,7 @@ class PendingPage extends StatelessWidget {
         onPressed: (){
           Navigator.push(context,
               MaterialPageRoute(builder: (context) =>
-              NewTodoPage()));
+              NewTodoPage(false,'','')));
         },
         tooltip: 'Add todo',
         child: Icon(Icons.add),

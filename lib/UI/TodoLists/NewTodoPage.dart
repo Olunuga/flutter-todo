@@ -3,17 +3,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NewTodoPage extends StatelessWidget {
 
+  NewTodoPage(this.isEditing, this.mText, this.identifier);
+
   String mText;
   bool isEditing;
+  String identifier;
+
 
   BuildContext mContext;
 
   void _submitInput(text){
-    Firestore.instance.collection('Todos').document()
-        .setData({ 'text': text,'completed':false,'tags':['work','android']});
+    if(!isEditing){
+      Firestore.instance.collection('Todos').document()
+          .setData({ 'text': text,'completed':false,'tags':['work','android']});
+    }else{
+      Firestore.instance.collection('Todos').document(identifier)
+          .updateData({ 'text': text});
+    }
     Navigator.pop(mContext);
   }
 
+  TextEditingController textEditingController = TextEditingController();
 
   void _handleSubmit(){
     _submitInput(mText);
@@ -23,6 +33,7 @@ class NewTodoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     mContext = context;
+    textEditingController.text = mText;
     return Scaffold(appBar: AppBar(
       title: Text('Add todo'),
     ),
@@ -31,11 +42,12 @@ class NewTodoPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             TextField(
+              maxLines: 2,
               onSubmitted: _submitInput,
+              controller: textEditingController,
               autofocus: true ,
               onChanged: (text){
                 mText = text;
-
                 print(text);
               },
             )

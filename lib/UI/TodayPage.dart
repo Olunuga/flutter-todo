@@ -10,7 +10,7 @@ class TodayPage extends StatelessWidget {
     Firestore.instance.collection("Todos").document(identifier).updateData({'completed':isChecked});
   }
 
-  _onEditTodoClicked({identifier}){
+  _onEditTodoClicked({identifier, text}){
 
   }
 
