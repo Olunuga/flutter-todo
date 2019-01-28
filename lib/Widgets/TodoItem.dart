@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/Widgets/CustomCheckbox.dart';
 
 typedef OnItemClicked = void Function({bool isChecked, String identifier});
-typedef OnEditItemClicked = void Function({String identifier});
+typedef OnEditItemClicked = void Function({String identifier, String text});
 
 class TodoItem extends StatelessWidget {
   TodoItem(this.identifier, this.text, this.completed, this.onItemClicked,
@@ -20,7 +20,7 @@ class TodoItem extends StatelessWidget {
 
   void _handleOnEditItemClicked(){
     print("Edit todo item was clicked");
-    onEditItemClicked(identifier:identifier);
+    onEditItemClicked(identifier: identifier, text : text);
   }
 
 
