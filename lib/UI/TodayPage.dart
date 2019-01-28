@@ -6,10 +6,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class TodayPage extends StatelessWidget {
 
   _onTodoClicked({isChecked,identifier}){
-    //update firebase here
     print('ischecked is $isChecked and identifier is $identifier');
     Firestore.instance.collection("Todos").document(identifier).updateData({'completed':isChecked});
   }
+
+  _onEditTodoClicked({identifier}){
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,8 @@ class TodayPage extends StatelessWidget {
                   return new ListView(
                     children: snapshot.data.documents.map((DocumentSnapshot document) {
                       return new TodoItem(document.documentID,document["text"],
-                          document["completed"], _onTodoClicked);
+                          document["completed"], _onTodoClicked,
+                          _onEditTodoClicked);
                     }).toList(),
                   );
               }

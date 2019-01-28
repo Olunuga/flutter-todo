@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_todo/Sections//AccountPage.dart';
-import 'package:flutter_todo/Sections/TodoLists/TodoLists.dart';
-import 'package:flutter_todo/Sections//TodayPage.dart';
+import 'package:flutter_todo/UI//AccountPage.dart';
+import 'package:flutter_todo/UI/TodoLists/TodoLists.dart';
+import 'package:flutter_todo/UI//TodayPage.dart';
 
 void main() {
   debugPaintSizeEnabled= false;
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Todo',
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
@@ -33,7 +33,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _counter = 0;
   int _selectedIndex = 0;
 
   final _widgetOptions = [
@@ -42,11 +41,6 @@ class _MainPageState extends State<MainPage> {
     AccountPage()
   ];
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   void _onItemTapped(int index) {
     setState(() {

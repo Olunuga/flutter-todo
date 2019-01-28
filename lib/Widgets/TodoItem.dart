@@ -2,30 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/Widgets/CustomCheckbox.dart';
 
 typedef OnItemClicked = void Function({bool isChecked, String identifier});
+typedef OnEditItemClicked = void Function({String identifier});
 
 class TodoItem extends StatelessWidget {
-  TodoItem(this.identifier, this.text, this.completed, this.onItemClicked);
+  TodoItem(this.identifier, this.text, this.completed, this.onItemClicked,
+      this.onEditItemClicked);
 
   final String identifier;
   final String text;
   final bool completed;
   final OnItemClicked onItemClicked;
+  final OnEditItemClicked onEditItemClicked;
 
   void _onCheckBoxChange() {
     onItemClicked(isChecked: !completed, identifier: identifier);
   }
 
-  void _voidCall(isChecked) => {};
+  void _handleOnEditItemClicked(){
+    print("Edit todo item was clicked");
+    onEditItemClicked(identifier:identifier);
+  }
+
+
+  void _voidCall(isChecked) => _onCheckBoxChange();
 
   @override
   Widget build(BuildContext context) {
-    GestureDetector detector = GestureDetector(
-      child: Container(
+      return Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
+            GestureDetector(child: Container(
               margin: EdgeInsets.only(right: 15),
               child: CustomCheckbox(
                   value: completed,
@@ -34,17 +42,23 @@ class TodoItem extends StatelessWidget {
                   useTapTarget: false,
                   activeColor: Colors.teal),
             ),
+            onTap: _onCheckBoxChange,
+            ),
+
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
+                  GestureDetector( child:Text(
                     text,
                     style: TextStyle(
                         color: Colors.black87, fontWeight: FontWeight.w500),
                   ),
+                    onTap: _onCheckBoxChange,
+                  ),
+
                   Row(
                     children: <Widget>[
                       Chip(
@@ -55,18 +69,16 @@ class TodoItem extends StatelessWidget {
                         flex: 1,
                         child: Container(
                             alignment: Alignment.centerLeft,
-                            child: FlatButton(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
                                   FlatButton(
-                                      onPressed: null, child: Text("EDIT")),
+                                      onPressed: _handleOnEditItemClicked, child: Text("EDIT")),
                                   FlatButton(
-                                      onPressed: null, child: Text("DELETE"))
+                                      onPressed: _handleOnEditItemClicked, child: Text("DELETE"))
                                 ],
                               ),
-                              onPressed: null,
-                            )),
+                             ),
                       ),
                     ],
                   ),
@@ -78,10 +90,6 @@ class TodoItem extends StatelessWidget {
         ),
         padding: EdgeInsets.only(right: 16, top: 16, left: 16),
         margin: EdgeInsets.only(bottom: 5),
-      ),
-      onTap: _onCheckBoxChange,
-    );
-
-    return detector;
+      );
   }
 }
