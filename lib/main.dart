@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_todo/UI//AccountPage.dart';
-import 'package:flutter_todo/UI/TodoLists/TodoLists.dart';
-import 'package:flutter_todo/UI//TodayPage.dart';
+import 'package:flutter_todo/Views//AccountView.dart';
+import 'package:flutter_todo/Views/Todos//AllTodosView.dart';
+import 'package:flutter_todo/Views//TodayTodosView.dart';
 
 void main() {
   debugPaintSizeEnabled= false;
@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
 
   final _widgetOptions = [
     TodayPage(),
-    PendingPage(),
+    AllTodos(),
     AccountPage()
   ];
 
@@ -62,7 +62,7 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(icon: Icon(Icons.calendar_today), title: Text
               ('Today')),
             BottomNavigationBarItem(icon: Icon(Icons.list), title: Text
-              ('Todos')),
+              ('All Todos')),
             BottomNavigationBarItem(icon: Icon(Icons.person_outline), title: Text
               ('Account'))
           ],

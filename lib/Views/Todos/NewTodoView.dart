@@ -15,7 +15,9 @@ class NewTodoPage extends StatelessWidget {
   void _submitInput(text){
     if(!isEditing){
       Firestore.instance.collection('Todos').document()
-          .setData({ 'text': text,'completed':false,'tags':['work','android']});
+          .setData({ 'text': text,'completed':false, 'isToday':false,'tags':['w'
+          'ork','a'
+      'ndroid']});
     }else{
       Firestore.instance.collection('Todos').document(identifier)
           .updateData({ 'text': text});
