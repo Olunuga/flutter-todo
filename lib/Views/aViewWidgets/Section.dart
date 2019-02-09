@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/Widgets/TodoItem.dart';
+import 'package:flutter_todo/Views/aViewWidgets/TodoItem.dart';
+
 
 class Section extends StatelessWidget {
   final String heading;
-  final List<TodoItem> todoItemList;
+  final List<Dismissible> todoItemList;
 
   Section({this.heading, this.todoItemList});
 

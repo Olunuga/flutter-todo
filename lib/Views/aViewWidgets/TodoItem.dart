@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/Widgets/CustomCheckbox.dart';
+import 'package:flutter_todo/Views/aViewWidgets/CustomCheckbox.dart';
 
 typedef OnItemClicked = void Function({bool isChecked, String identifier});
 typedef OnEditItemClicked = void Function({String identifier, String text});
@@ -40,7 +40,7 @@ class TodoItem extends StatelessWidget {
                   materialTapTargetSize: null,
                   onChanged: _voidCall,
                   useTapTarget: false,
-                  activeColor: Colors.teal),
+                  activeColor: completed? Colors.grey: Colors.teal),
             ),
             onTap: _onCheckBoxChange,
             ),
@@ -54,7 +54,10 @@ class TodoItem extends StatelessWidget {
                   GestureDetector( child:Text(
                     text,
                     style: TextStyle(
-                        color: Colors.black87, fontWeight: FontWeight.w500),
+                        color: completed? Colors.black54: Colors.black87,
+                        fontWeight:
+                    FontWeight.w500,
+                        decoration: completed? TextDecoration.lineThrough:null),
                   ),
                     onTap: _onCheckBoxChange,
                   ),
