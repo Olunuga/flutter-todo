@@ -53,6 +53,7 @@ class AllTodoState  extends State<AllTodos> {
 
 
     snapshot.data.documents.forEach((document) {
+      print(document['tags'].toString());
       TodoItem todoItem = TodoItem(document.documentID, document["text"],
           document["completed"], _onTodoClicked, _onEditTodoClicked);
 

@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Todo',
       theme: ThemeData(
         primarySwatch: Colors.teal,
+       fontFamily: 'Rubik'
       ),
       home: MainPage(title: 'Todo'),
     );

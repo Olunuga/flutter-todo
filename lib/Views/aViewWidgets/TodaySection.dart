@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/Views/aViewWidgets/TodayTodoItem.dart';
-import 'package:flutter_todo/Views/aViewWidgets/TodoItem.dart';
-
 
 class TodaySection extends StatelessWidget {
   final String heading;
-  final List<TodayTodoItem> todoItemList;
+  final List<Dismissible> todoItemList;
 
   TodaySection({this.heading, this.todoItemList});
 
@@ -14,10 +11,18 @@ class TodaySection extends StatelessWidget {
     // TODO: Style section item here.
     return Column(
       children: <Widget>[
-        Container(alignment: AlignmentDirectional.centerStart,child: Text
-          (heading),padding: EdgeInsets.only(left: 16, top: 25,right: 16,
-            bottom: 16)),
-        Column(children: todoItemList)
+        Container(
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(
+              heading,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            padding: EdgeInsets.only(left: 16, top: 25, right: 16, bottom: 16)),
+        Card(child: Column(children: todoItemList),margin: EdgeInsets.only
+          (left:0,right: 0,top: 0,bottom: 10),elevation: 0,
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0.0),
+    ),)
       ],
     );
   }

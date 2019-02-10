@@ -113,7 +113,8 @@ class _CheckboxState extends State<CustomCheckbox> with TickerProviderStateMixin
       value: widget.value,
       tristate: widget.tristate,
       activeColor: widget.activeColor ?? themeData.toggleableActiveColor,
-      inactiveColor: widget.onChanged != null ? themeData.unselectedWidgetColor : themeData.disabledColor,
+      inactiveColor: themeData.primaryColor,//widget.onChanged != null ?
+      // themeData//.unselectedWidgetColor : themeData.disabledColor,
       onChanged: widget.onChanged,
       additionalConstraints: additionalConstraints,
       vsync: this,
