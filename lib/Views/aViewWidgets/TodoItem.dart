@@ -3,16 +3,20 @@ import 'package:flutter_todo/Views/aViewWidgets/CustomCheckbox.dart';
 
 typedef OnItemClicked = void Function({bool isChecked, String identifier});
 typedef OnEditItemClicked = void Function({String identifier, String text});
+typedef OnDeleteItemClicked = void Function({String identifier});
 
 class TodoItem extends StatelessWidget {
-  TodoItem(this.identifier, this.text, this.completed, this.onItemClicked,
-      this.onEditItemClicked);
-
   final String identifier;
   final String text;
   final bool completed;
   final OnItemClicked onItemClicked;
   final OnEditItemClicked onEditItemClicked;
+  final OnDeleteItemClicked onDeleteItemClicked;
+
+  TodoItem(this.identifier, this.text, this.completed, this.onItemClicked,
+      this.onEditItemClicked, this.onDeleteItemClicked);
+
+
 
   void _onCheckBoxChange() {
     onItemClicked(isChecked: !completed, identifier: identifier);
@@ -21,6 +25,11 @@ class TodoItem extends StatelessWidget {
   void _handleOnEditItemClicked(){
     print("Edit todo item was clicked");
     onEditItemClicked(identifier: identifier, text : text);
+  }
+
+  void _handleOnDeleteItemClicked(){
+    print("Edit todo item was clicked");
+    onDeleteItemClicked(identifier: identifier);
   }
 
 
@@ -78,7 +87,7 @@ class TodoItem extends StatelessWidget {
                                   FlatButton(
                                       onPressed: _handleOnEditItemClicked, child: Text("EDIT")),
                                   FlatButton(
-                                      onPressed: _handleOnEditItemClicked, child: Text("DELETE"))
+                                      onPressed: _handleOnDeleteItemClicked, child: Text("DELETE"))
                                 ],
                               ),
                              ),
