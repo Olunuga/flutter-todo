@@ -35,6 +35,15 @@ class AllTodoState  extends State<AllTodos> {
         MaterialPageRoute(
             builder: (context) => NewTodoPage(true, text, identifier)));
   }
+
+  _onDeleteTodoClicked({identifier}) {
+    print('I want to delete $identifier');
+    Firestore.instance.collection("Todos").document(identifier).delete().catchError(
+            (e){
+      print(e);
+    });
+  }
+
   _handleSwipe({documentId}){
     print("I want to add to todays list");
     Firestore.instance
@@ -55,7 +64,7 @@ class AllTodoState  extends State<AllTodos> {
     snapshot.data.documents.forEach((document) {
       print(document['tags'].toString());
       TodoItem todoItem = TodoItem(document.documentID, document["text"],
-          document["completed"], _onTodoClicked, _onEditTodoClicked);
+          document["completed"], _onTodoClicked, _onEditTodoClicked, _onDeleteTodoClicked);
 
       var dismissible = Dismissible(
         key: Key(document.documentID),
